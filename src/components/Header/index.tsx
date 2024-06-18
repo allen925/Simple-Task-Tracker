@@ -3,12 +3,15 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
 import { useState } from "react";
 import { AssignmentType } from '../../helpers/type';
+// import { DayPicker } from "react-day-picker";
 
-type setStringListP = {
+type HeaderProps = {
   setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
+  // setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  // selectedDate: Date | undefined;, setSelectedDate, selectedDate 
 };
 
-export function Header({ setAssignments }: setStringListP) {
+export function Header({ setAssignments}: HeaderProps) {
   const [answer, setAnswer] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
@@ -32,6 +35,7 @@ export function Header({ setAssignments }: setStringListP) {
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
       <h1>{uppercase("bcit")} Assignment Tracker</h1>
+      {/* <DayPicker mode="single" selected={selectedDate} onSelect={setSelectedDate} />; */}
       <form className={styles.newAssignmentForm} onSubmit={handleSubmit}>
         <input placeholder="Add a new assignment" type="text" value={answer} onChange={handleInputChange} />
         <button disabled={
