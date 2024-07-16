@@ -1,7 +1,7 @@
 import styles from "./header.module.css";
 import { AiOutlinePlusCircle, AiOutlineCalendar } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
-import { useState, CSSProperties } from "react";
+import { useState } from "react";
 import { AssignmentType } from '../../helpers/type';
 import { DayPicker } from "react-day-picker";
 
@@ -40,27 +40,6 @@ export function Header({ setAssignments }: HeaderProps) {
     toggleDatePicker();  // Optionally close the picker on selection
   };
 
-  interface MyCustomCSS extends CSSProperties {
-    '--anchor-btn-1': string;
-    'positionAnchor': string;
-  }
-  const buttonStyle = {
-    // Hypothetical property, won't actually function
-    '--anchor-btn-1': 'tooltip-anchor'
-  } as CSSProperties;
-
-  const tooltipStyle = {
-    // Hypothetical property, won't actually function
-    'positionAnchor': '--anchor-btn-1',
-    position: 'absolute',
-    maxWidth: '300px',
-    background: 'black',
-    color: 'white',
-    padding: '1rem',
-    borderRadius: '1rem',
-    marginTop: '0.5rem',
-  } as CSSProperties;
-
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
@@ -79,14 +58,6 @@ export function Header({ setAssignments }: HeaderProps) {
         </div>
 
 
-        <div>
-          <button style={buttonStyle}>
-            <p aria-hidden="true">?</p>
-          </button>
-          <div id="my-tooltip-1" className="tooltip" style={tooltipStyle}>
-            <p>The sun dipped, fiery orange melting into buttery yellow. Maya mirrored the hues on canvas, each stroke bittersweet – fleeting beauty, a day gone. Yet, she painted on, for in those streaks lay the promise of a new dawn.</p>
-          </div>
-        </div>
 
         {/* <button style="anchor-name: --anchor-btn-1" popovertarget="my-tooltip-1">
           <p aria-hidden="true">?</p>
