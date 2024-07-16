@@ -1,18 +1,18 @@
 import styles from "./header.module.css";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineCalendar } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
-import { useState } from "react";
+import { useState, CSSProperties } from "react";
 import { AssignmentType } from '../../helpers/type';
-// import { DayPicker } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 
 type HeaderProps = {
   setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
-  // setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
-  // selectedDate: Date | undefined;, setSelectedDate, selectedDate 
 };
 
-export function Header({ setAssignments}: HeaderProps) {
+export function Header({ setAssignments }: HeaderProps) {
   const [answer, setAnswer] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -21,29 +21,86 @@ export function Header({ setAssignments}: HeaderProps) {
     setAnswer(e.target.value);
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>){
-    e.preventDefault(); 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     if (answer) {
-      setAssignments(prevAssignments => [...prevAssignments, {description:answer, completed:false}]);
-      setAnswer(''); 
+      setAssignments(prevAssignments => [...prevAssignments, { description: answer, completed: false, dueDate: selectedDate }]);
+      setAnswer('');
     } else {
       setError('Please enter a valid assignment name.');
     }
   }
 
+  const toggleDatePicker = () => {
+    setIsPickerOpen(!isPickerOpen);
+  };
+
+  const handleDateChange = (date: Date | undefined) => {
+    setSelectedDate(date);
+    toggleDatePicker();  // Optionally close the picker on selection
+  };
+
+  interface MyCustomCSS extends CSSProperties {
+    '--anchor-btn-1': string;
+    'positionAnchor': string;
+  }
+  const buttonStyle = {
+    // Hypothetical property, won't actually function
+    '--anchor-btn-1': 'tooltip-anchor'
+  } as CSSProperties;
+
+  const tooltipStyle = {
+    // Hypothetical property, won't actually function
+    'positionAnchor': '--anchor-btn-1',
+    position: 'absolute',
+    maxWidth: '300px',
+    background: 'black',
+    color: 'white',
+    padding: '1rem',
+    borderRadius: '1rem',
+    marginTop: '0.5rem',
+  } as CSSProperties;
+
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
       <h1>{uppercase("bcit")} Assignment Tracker</h1>
-      {/* <DayPicker mode="single" selected={selectedDate} onSelect={setSelectedDate} />; */}
       <form className={styles.newAssignmentForm} onSubmit={handleSubmit}>
         <input placeholder="Add a new assignment" type="text" value={answer} onChange={handleInputChange} />
+        <div>
+          <button type="button" className={styles.toggleButton} onClick={toggleDatePicker}>
+            <AiOutlineCalendar size={20} />
+          </button>
+          {isPickerOpen && (
+            <div className={styles.datePickerContainer}>
+              <DayPicker mode="single" selected={selectedDate} onSelect={handleDateChange} />
+            </div>
+          )}
+        </div>
+
+
+        <div>
+          <button style={buttonStyle}>
+            <p aria-hidden="true">?</p>
+          </button>
+          <div id="my-tooltip-1" className="tooltip" style={tooltipStyle}>
+            <p>The sun dipped, fiery orange melting into buttery yellow. Maya mirrored the hues on canvas, each stroke bittersweet – fleeting beauty, a day gone. Yet, she painted on, for in those streaks lay the promise of a new dawn.</p>
+          </div>
+        </div>
+
+        {/* <button style="anchor-name: --anchor-btn-1" popovertarget="my-tooltip-1">
+          <p aria-hidden="true">?</p>
+        </button>
+        <div id="my-tooltip-1" className="tooltip" style="position-anchor: --anchor-btn-1" popover>
+          <p>The sun dipped, fiery orange melting into buttery yellow. Maya mirrored the hues on canvas, each stroke bittersweet – fleeting beauty, a day gone. Yet, she painted on, for in those streaks lay the promise of a new dawn.</p>
+        </div> */}
+
         <button disabled={
           answer.length === 0}>
           Create <AiOutlinePlusCircle size={20} />
         </button>
       </form>
-      {error && <p className={styles.error}>{error}</p>} 
+      {error && <p className={styles.error}>{error}</p>}
     </header>
   );
 }

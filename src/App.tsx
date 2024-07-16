@@ -6,10 +6,9 @@ import "react-day-picker/dist/style.css";
 
 function App() {
   const [assignments, setAssignments] = useState<AssignmentType[]>([]);
-  // const [selectedDate, setSelectedDate] = useState<Date>();selectedDate={selectedDate} setSelectedDate={setSelectedDate}
   return (
     <>
-    <Header setAssignments={setAssignments} />
+    <Header setAssignments={setAssignments}/>
       <Assignments assignments={assignments} setAssignments={setAssignments}/>
     </>
   );

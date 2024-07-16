@@ -51,3 +51,6 @@
   background: lightgrey;
   cursor: default;
 }
+.datePickerContainer {
+  position:sticky;
+}
