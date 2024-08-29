@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "date-fns": "^3.6.0",
-    "react": "^18.2.0",
-    "react-day-picker": "^8.10.1",
-    "react-dom": "^18.2.0",
+    "react": "19.0.0-rc-8b08e99e-20240713",
+    "react-day-picker": "^9.0.8",
+    "react-dom": "19.0.0-rc-8b08e99e-20240713",
     "react-icons": "^4.8.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0",
@@ -27,5 +27,9 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
+  },
+  "overrides": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0"
   }
 }
