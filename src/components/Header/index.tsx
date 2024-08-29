@@ -53,7 +53,10 @@ export function Header({ setTasks }: HeaderProps) {
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
-      <h1>{uppercase("bcit")} Task Tracker</h1>
+      <h1>
+        {/* {uppercase("bcit")}  */}
+        Task Tracker
+      </h1>
       <form className={styles.newTaskForm} onSubmit={handleSubmit}>
         <input placeholder="Add a new task" type="text" value={answer} onChange={handleInputChange} />
         <div ref={calendarRef}>
