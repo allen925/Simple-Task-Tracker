@@ -1,0 +1,29 @@
+
+.infobox {
+  background-color: rgb(79, 79, 79);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  position: fixed;
+  position-anchor: --myAnchor;
+  top: calc(anchor(bottom) + 5px);
+  left: 50%; 
+z-index: 20;}
+
+.selected {
+  background-color: hsl(240, 99%, 72%) !important;
+}
+
+.chev {
+  fill:hsl(240, 99%, 72%) ;
+}
+
+.chev:hover {
+  fill:hsl(240, 96%, 67%) ;
+}
+
+@media (max-width: 701px) {
+  .infobox {
+    justify-self: anchor-center;
+  }
+}

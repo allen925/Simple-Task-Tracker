@@ -6,9 +6,10 @@ import "react-day-picker/dist/style.css";
 
 function App() {
   const [assignments, setAssignments] = useState<AssignmentType[]>([]);
+
   return (
     <>
-    <Header setAssignments={setAssignments}/>
+      <Header setAssignments={setAssignments} />
       <Assignments assignments={assignments} setAssignments={setAssignments}/>
     </>
   );

@@ -43,6 +43,7 @@ p.textCompleted {
 }
 
 .deleteButton {
+  margin: 0 10px;
   background: none;
   border: none;
   color: #808080;

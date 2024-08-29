@@ -1,9 +1,9 @@
 import styles from "./header.module.css";
 import { AiOutlinePlusCircle, AiOutlineCalendar } from "react-icons/ai";
-import { uppercase } from "../../helpers/stringHelpers";
-import { useState } from "react";
+import { uppercase, formatDate } from "../../helpers/helpers";
+import { useEffect, useRef, useState } from "react";
 import { AssignmentType } from '../../helpers/type';
-import { DayPicker } from "react-day-picker";
+import { Calendar } from "../Calendar";
 
 type HeaderProps = {
   setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
@@ -31,13 +31,28 @@ export function Header({ setAssignments }: HeaderProps) {
     }
   }
 
-  const toggleDatePicker = () => {
-    setIsPickerOpen(!isPickerOpen);
-  };
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+        setIsPickerOpen(false);
+      }
+    };
 
-  const handleDateChange = (date: Date | undefined) => {
-    setSelectedDate(date);
-    toggleDatePicker();  // Optionally close the picker on selection
+    if (isPickerOpen) {
+      document.addEventListener('click', handleOutsideClick);
+    } else {
+      document.removeEventListener('click', handleOutsideClick);
+    }
+
+    // Cleanup the event listener unmounts / closes
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [isPickerOpen]);
+
+  const toggleDatePicker = () => {
+    setIsPickerOpen(prev => !prev);
   };
 
   return (
@@ -46,30 +61,32 @@ export function Header({ setAssignments }: HeaderProps) {
       <h1>{uppercase("bcit")} Assignment Tracker</h1>
       <form className={styles.newAssignmentForm} onSubmit={handleSubmit}>
         <input placeholder="Add a new assignment" type="text" value={answer} onChange={handleInputChange} />
-        <div>
-          <button type="button" className={styles.toggleButton} onClick={toggleDatePicker}>
-            <AiOutlineCalendar size={20} />
+        <div ref={calendarRef}>
+          <button type="button" className={styles.button + ' ' + styles.toggleButton + ' ' + styles.anchor} onClick={toggleDatePicker}>
+            {selectedDate ? formatDate(selectedDate) : <AiOutlineCalendar size={20} />}
           </button>
           {isPickerOpen && (
-            <div className={styles.datePickerContainer}>
-              <DayPicker mode="single" selected={selectedDate} onSelect={handleDateChange} />
-            </div>
+            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} setIsPickerOpen={setIsPickerOpen} isPickerOpen={isPickerOpen} />
           )}
         </div>
-
-
-
-        {/* <button style="anchor-name: --anchor-btn-1" popovertarget="my-tooltip-1">
-          <p aria-hidden="true">?</p>
-        </button>
-        <div id="my-tooltip-1" className="tooltip" style="position-anchor: --anchor-btn-1" popover>
-          <p>The sun dipped, fiery orange melting into buttery yellow. Maya mirrored the hues on canvas, each stroke bittersweet – fleeting beauty, a day gone. Yet, she painted on, for in those streaks lay the promise of a new dawn.</p>
-        </div> */}
-
-        <button disabled={
-          answer.length === 0}>
-          Create <AiOutlinePlusCircle size={20} />
-        </button>
+        {/* hide date picker if clicked on it. */}
+        <div style={{ display: "inline-block", position: "relative" }}>
+          <button className={styles.button} disabled={!answer}>
+            Create <AiOutlinePlusCircle size={20} />
+          </button>
+          {!answer && (
+            <div style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              cursor: "not-allowed",
+              pointerEvents: "auto",
+              zIndex: 10
+            }}/>
+          )}
+        </div>
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </header>

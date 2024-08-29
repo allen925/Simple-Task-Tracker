@@ -7,6 +7,10 @@
   position: relative;
 }
 
+h1{
+  text-align: center;
+}
+
 .newAssignmentForm {
   position: absolute;
   height: 54px;
@@ -33,24 +37,61 @@
   color: #808080;
 }
 
-.newAssignmentForm button {
+.newAssignmentForm .button {
   height: 100%;
   padding: 0 16px;
   background: #8284fa;
-  color: #fff;
   border: none;
   border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
+  /* font */
   font-weight: 700;
   font-size: 14px;
 }
 
-.newAssignmentForm button:disabled {
+.newAssignmentForm .button:disabled {
   background: lightgrey;
   cursor: default;
 }
-.datePickerContainer {
-  position:sticky;
+
+.newAssignmentForm .button:not(:disabled){
+  color: #fff;
+}
+
+.newAssignmentForm .button:not(:disabled):hover {
+  background-color:hsl(240, 96%, 67%) ;
+}
+
+.anchor {
+  width: fit-content;
+  anchor-name: --myAnchor;
+}
+
+@media (max-width: 701px) {
+  .header {
+    height: 130px;
+    font-size: small;
+  }
+
+  .newAssignmentForm {
+    flex-direction: column;
+    height: auto;
+    bottom: -175px;
+  }
+
+  .newAssignmentForm input, .newAssignmentForm button{
+    flex-basis: auto ;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .newAssignmentForm input,
+  .newAssignmentForm .button {
+    justify-content: center;
+    width: 100%;
+    height: 54px;
+    margin-bottom: 8px;
+  }
 }
