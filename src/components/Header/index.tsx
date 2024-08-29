@@ -2,14 +2,14 @@ import styles from "./header.module.css";
 import { AiOutlinePlusCircle, AiOutlineCalendar } from "react-icons/ai";
 import { uppercase, formatDate } from "../../helpers/helpers";
 import { useEffect, useRef, useState } from "react";
-import { AssignmentType } from '../../helpers/type';
+import { TaskType } from '../../helpers/type';
 import { Calendar } from "../Calendar";
 
 type HeaderProps = {
-  setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
+  setTasks: React.Dispatch<React.SetStateAction<TaskType[]>>;
 };
 
-export function Header({ setAssignments }: HeaderProps) {
+export function Header({ setTasks }: HeaderProps) {
   const [answer, setAnswer] = useState<string>('');
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
@@ -24,10 +24,10 @@ export function Header({ setAssignments }: HeaderProps) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (answer) {
-      setAssignments(prevAssignments => [...prevAssignments, { description: answer, completed: false, dueDate: selectedDate }]);
+      setTasks(prevTasks => [...prevTasks, { description: answer, completed: false, dueDate: selectedDate }]);
       setAnswer('');
     } else {
-      setError('Please enter a valid assignment name.');
+      setError('Please enter a valid task name.');
     }
   }
 
@@ -53,9 +53,9 @@ export function Header({ setAssignments }: HeaderProps) {
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
-      <h1>{uppercase("bcit")} Assignment Tracker</h1>
-      <form className={styles.newAssignmentForm} onSubmit={handleSubmit}>
-        <input placeholder="Add a new assignment" type="text" value={answer} onChange={handleInputChange} />
+      <h1>{uppercase("bcit")} Task Tracker</h1>
+      <form className={styles.newTaskForm} onSubmit={handleSubmit}>
+        <input placeholder="Add a new task" type="text" value={answer} onChange={handleInputChange} />
         <div ref={calendarRef}>
           <button type="button" className={styles.button + ' ' + styles.toggleButton + ' ' + styles.anchor} onClick={() => setIsPickerOpen(prev => !prev)}>
             {selectedDate ? formatDate(selectedDate) : <AiOutlineCalendar size={20} />}

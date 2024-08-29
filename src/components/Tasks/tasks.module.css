@@ -1,4 +1,4 @@
-.assignments {
+.tasks {
   width: 100%;
   max-width: 736px;
   margin: 0 auto;
@@ -45,7 +45,7 @@
 }
 
 @media (max-width: 700px) {
-  .assignments {
+  .tasks {
     margin-top: 190px;
   }
 

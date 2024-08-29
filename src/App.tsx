@@ -1,16 +1,16 @@
 import { Header } from "./components/Header";
-import { Assignments } from "./components/Assignments";
+import { Tasks } from "./components/Tasks";
 import { useState } from "react";
-import { AssignmentType } from './helpers/type';
+import { TaskType } from './helpers/type';
 import "react-day-picker/dist/style.css";
 
 function App() {
-  const [assignments, setAssignments] = useState<AssignmentType[]>([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
 
   return (
     <>
-      <Header setAssignments={setAssignments} />
-      <Assignments assignments={assignments} setAssignments={setAssignments} />
+      <Header setTasks={setTasks} />
+      <Tasks tasks={tasks} setTasks={setTasks} />
     </>
   );
 }
@@ -20,8 +20,8 @@ export default App;
 
 /**
  * structure (props): 
- * App -> Header (setAssignments)                   
+ * App -> Header (setTasks)                   
  *        -> Calendar (selectedDate, setSelectedDate, setIsPickerOpen)
- *     -> Assignments (assignments, setAssignments) 
- *        -> Assignment (assignment, toggleCompletion, deleteAssignment)
+ *     -> Tasks (tasks, setTasks) 
+ *        -> Task (task, toggleCompletion, deleteTask)
  */

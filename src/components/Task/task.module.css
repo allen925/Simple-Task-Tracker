@@ -1,4 +1,4 @@
-.assignment {
+.task {
   width: 100%;
   background: #262626;
   border: 1px solid #333333;
@@ -10,7 +10,7 @@
   gap: 12px;
 }
 
-.assignment p {
+.task p {
   font-size: 14px;
   line-height: 19px;
   color: #f2f2f2;

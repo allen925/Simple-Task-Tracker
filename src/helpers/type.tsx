@@ -1,4 +1,4 @@
-export type AssignmentType = {
+export type TaskType = {
     description: string;
     completed: boolean;
     dueDate?: Date
