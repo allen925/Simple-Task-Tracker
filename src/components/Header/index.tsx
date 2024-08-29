@@ -34,9 +34,8 @@ export function Header({ setAssignments }: HeaderProps) {
   const calendarRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+      if (calendarRef.current && !calendarRef.current.contains(event.target as Node))
         setIsPickerOpen(false);
-      }
     };
 
     if (isPickerOpen) {
@@ -51,10 +50,6 @@ export function Header({ setAssignments }: HeaderProps) {
     };
   }, [isPickerOpen]);
 
-  const toggleDatePicker = () => {
-    setIsPickerOpen(prev => !prev);
-  };
-
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
@@ -62,11 +57,11 @@ export function Header({ setAssignments }: HeaderProps) {
       <form className={styles.newAssignmentForm} onSubmit={handleSubmit}>
         <input placeholder="Add a new assignment" type="text" value={answer} onChange={handleInputChange} />
         <div ref={calendarRef}>
-          <button type="button" className={styles.button + ' ' + styles.toggleButton + ' ' + styles.anchor} onClick={toggleDatePicker}>
+          <button type="button" className={styles.button + ' ' + styles.toggleButton + ' ' + styles.anchor} onClick={() => setIsPickerOpen(prev => !prev)}>
             {selectedDate ? formatDate(selectedDate) : <AiOutlineCalendar size={20} />}
           </button>
           {isPickerOpen && (
-            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} setIsPickerOpen={setIsPickerOpen} isPickerOpen={isPickerOpen} />
+            <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} setIsPickerOpen={setIsPickerOpen} />
           )}
         </div>
         {/* hide date picker if clicked on it. */}

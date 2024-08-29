@@ -1,7 +1,6 @@
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 import { AssignmentType } from '../../helpers/type';
-import { formatDate } from "../../helpers/helpers";
 import { useEffect, useState } from "react";
 
 type assignmentTypeListP = {
@@ -54,7 +53,7 @@ export function Assignments({ assignments, setAssignments }: assignmentTypeListP
 
       <div className={styles.list}>
         {assignments.map((assignment, index) => (
-          <Assignment assignment={assignment} key={index} toggleCompletion={() => toggleCompletion(index)} deleteAssignment={() => deleteAssignment(index)} formatDate={formatDate} />
+          <Assignment assignment={assignment} key={index} toggleCompletion={() => toggleCompletion(index)} deleteAssignment={() => deleteAssignment(index)} />
         ))}
       </div>
     </section>

@@ -10,10 +10,9 @@ type params = {
   selectedDate: Date | undefined;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
   setIsPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isPickerOpen: boolean;
 };
 
-export function Calendar({ selectedDate, setSelectedDate, setIsPickerOpen, isPickerOpen }: params) {
+export function Calendar({ selectedDate, setSelectedDate, setIsPickerOpen }: params) {
   const [hoveredDay, setHoveredDay] = useState<Date | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -23,8 +22,13 @@ export function Calendar({ selectedDate, setSelectedDate, setIsPickerOpen, isPic
   }, []);
 
   const handleDateChange = (date: Date | undefined) => {
-    setSelectedDate(date);
-    setIsPickerOpen(!isPickerOpen);
+    // Toggle the selected date if the same date is clicked again (to deselect on mobile)
+    if (selectedDate && date && date.getTime() === selectedDate.getTime()) {
+      setSelectedDate(undefined);
+    } else {
+      setSelectedDate(date);
+    }
+    setIsPickerOpen((prev) => !prev);
   };
 
   const DayButton = ({ day, ...buttonProps }: DayButtonProps) => {

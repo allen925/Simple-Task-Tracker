@@ -2,15 +2,15 @@ import styles from "./assignment.module.css";
 import { TbTrash } from "react-icons/tb";
 import { AssignmentType } from '../../helpers/type';
 import { BsCheckCircleFill } from "react-icons/bs";
+import { formatDate } from "../../helpers/helpers";
 
 type AssignmentProps = {
   assignment: AssignmentType;
   toggleCompletion: () => void;
   deleteAssignment: () => void;
-  formatDate(date: Date): string | null;
 }
 
-export function Assignment({ assignment, toggleCompletion, deleteAssignment, formatDate }: AssignmentProps) {
+export function Assignment({ assignment, toggleCompletion, deleteAssignment }: AssignmentProps) {
 
   return (
     <div className={styles.assignment}>

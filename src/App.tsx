@@ -16,3 +16,12 @@ function App() {
 }
 
 export default App;
+
+
+/**
+ * structure (props): 
+ * App -> Header (setAssignments)                   
+ *        -> Calendar (selectedDate, setSelectedDate, setIsPickerOpen)
+ *     -> Assignments (assignments, setAssignments) 
+ *        -> Assignment (assignment, toggleCompletion, deleteAssignment)
+ */
