@@ -7,7 +7,7 @@
   position: relative;
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
@@ -56,12 +56,12 @@ h1{
   cursor: default;
 }
 
-.newAssignmentForm .button:not(:disabled){
+.newAssignmentForm .button:not(:disabled) {
   color: #fff;
 }
 
 .newAssignmentForm .button:not(:disabled):hover {
-  background-color:hsl(240, 96%, 67%) ;
+  background-color: hsl(240, 96%, 67%);
 }
 
 .anchor {
@@ -81,8 +81,9 @@ h1{
     bottom: -175px;
   }
 
-  .newAssignmentForm input, .newAssignmentForm button{
-    flex-basis: auto ;
+  .newAssignmentForm input,
+  .newAssignmentForm button {
+    flex-basis: auto;
     padding: 0 16px;
     text-align: center;
   }

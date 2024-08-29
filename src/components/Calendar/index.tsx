@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarDay, DayPicker, Modifiers } from "react-day-picker";
-import styles from "./calendar.module.css"; 
+import styles from "./calendar.module.css";
 interface DayButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   day: CalendarDay;
   modifiers: Modifiers;
@@ -8,7 +8,7 @@ interface DayButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 type params = {
   selectedDate: Date | undefined;
-  setSelectedDate:  React.Dispatch<React.SetStateAction<Date | undefined>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
   setIsPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isPickerOpen: boolean;
 };

@@ -84,7 +84,7 @@ export function Header({ setAssignments }: HeaderProps) {
               cursor: "not-allowed",
               pointerEvents: "auto",
               zIndex: 10
-            }}/>
+            }} />
           )}
         </div>
       </form>

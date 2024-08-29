@@ -13,7 +13,7 @@
   margin-bottom: 24px;
 }
 
-.header > div {
+.header>div {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -48,9 +48,11 @@
   .assignments {
     margin-top: 190px;
   }
+
   .header p {
-    display: none; 
+    display: none;
   }
+
   .header p.showOnMobile {
     display: block;
   }

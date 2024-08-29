@@ -9,7 +9,7 @@ function formatDate(date: Date) {
   const month = date.toLocaleString('en-US', { month: 'short' });
   const year = date.getFullYear();
   const formattedDate = `${month} ${day} ${year}`;
-  return date.getTime() < new Date().setHours(0,0,0,0) ? `${formattedDate} (passed)` : formattedDate;
+  return date.getTime() < new Date().setHours(0, 0, 0, 0) ? `${formattedDate} (passed)` : formattedDate;
 }
 
 export { uppercase, formatDate };
